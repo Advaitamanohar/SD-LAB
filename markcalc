@@ -1,4 +1,9 @@
 i=0
+g[0]=0
+g[1]=0
+g[2]=0
+g[4]=0
+g[5]=0
 #to find total
 while IFS=","  read rno adm name m1 m2 m3 m4 m5 m6 m7 
 do
@@ -42,30 +47,49 @@ echo "mean-2sd" $e
 while IFS=","  read rno adm name m1 m2 m3 m4 m5 m6 m7; do
 	tot=$((m1+m2+m3+m4+m5+m6+m7))
 	if [ $tot -gt $a ];then
-	grade="A" echo $name"|==========A"
+	grade="A" 
 	g[0]=$((${g[0]}+1))
 	elif [[ $tot -le $a && $tot -gt $b ]];then
-	grade="B" echo $forname"|========B"
+	grade="B"  echo $name "B"
 	g[1]=$((${g[1]}+1))
 	elif [[ $tot -le $b && $tot -gt $c ]];then
-	grade="C" echo $name"|======C"
+	grade="C"  echo $name "C"
 	g[2]=$((${g[2]}+1))
 	elif [[ $tot -le $c && $tot -gt $d ]];then
-	grade="D" echo $name"|====D"
+	grade="D"  echo $name "D"
 	g[3]=$((${g[3]}+1))
 	elif [[ $tot -le $d && $tot -gt $e ]];then
-	grade="E" echo $name"|==E"
+	grade="E"  echo $name "E"
 	g[4]=$((${g[4]}+1))
 	else 
-	grade="F" echo $name"|=F"
-	gf=$(($gf+1))
+	grade="F" echo $name "Failed"
+	g[5]=$((${g[5]}+1))
 	fi
 	
 done < studrec
-echo "   _________________"
-echo "    F E D C B A"
-echo ${g[*]}
-for((i=0;i<n;i++))
-{
-if
-}
+
+#histogram
+
+for((i=0;i<6;i++))
+do
+if [ $i -eq 0 ];then
+echo -n "A|"
+elif [ $i -eq 1 ]; then
+echo -n "B|"
+elif [ $i -eq 2 ]; then
+echo -n "C|"
+elif [ $i -eq 3 ]; then
+echo -n "D|"
+elif [ $i -eq 4 ]; then
+echo -n "E|"
+elif [ $i -eq 5 ]; then
+echo -n "F|"
+fi
+for((j=1;j<=${g[$i]};j++))
+do
+echo -n "*"
+done
+echo ""
+done
+
+
