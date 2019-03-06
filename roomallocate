@@ -1,0 +1,58 @@
+rno1=()
+rno3=()
+rno5=()
+name1=()
+name3=()
+name5=()
+a=0
+b=0
+c=0
+st=()
+m=0
+l=0
+read -p "enter the number of rooms" n
+read -p "enter the number of seats in one room" seats
+
+while IFS="," read rno name;do
+	rno1[$a]=$rno
+	name1[$a]=$name
+	((a++))
+	
+done < s1.csv
+while IFS="," read rno name;do
+	rno3[$b]=$rno
+	name3[$b]=$name
+	((b++))
+
+done < s3.csv
+while IFS="," read rno name;do
+	rno5[$c]=$rno
+	name[$c]=$name
+	((c++))
+
+done < s5.csv
+echo $a
+echo $b
+echo $c
+#echo ${rno1[*]}
+#echo ${rno3[*]}
+#echo ${rno5[*]}
+#for((i=1;i<=n;i++))
+#do
+echo "Room No:" $i
+for((j=1;j<=seats;j++))
+do
+if [[ $(($j%2)) -eq 0 ]]
+then
+st[$z]=${rno1[$l]}
+((l++))
+((z++))
+else
+st[$z]=${rno3[$m]}
+((m++))
+((z++))
+fi
+done
+#echo ${rno1[@]}
+#echo ${rno3[@]}
+echo ${st[@]}
