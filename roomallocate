@@ -1,9 +1,6 @@
 rno1=()
 rno3=()
 rno5=()
-name1=()
-name3=()
-name5=()
 a=0
 b=0
 c=0
@@ -26,7 +23,6 @@ done < s3.csv
 #read S5.csv file and storing it in an array
 while IFS="," read rno name;do
     rno5[$c]=$rno
-    name[$c]=$name
     ((c++))
 done < s5.csv
 echo "No of students in S1:" $a
